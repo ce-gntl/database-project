@@ -1,0 +1,203 @@
+﻿
+--QUERIES
+
+
+--1.Given the title of a research project 'Genotoxic Damage During Brain Development Presages Prototypical Neurodegenerative Disease' extract the first and last names of the researchers associated with that project;
+
+
+select nome,cognome
+from ricercatore,progetto_ricerca
+where ricercatore.progetto=progetto_ricerca.codice_progetto and titolo='Genotoxic Damage During Brain Development Presages Prototypical Neurodegenerative Disease';
+
+
+select nome,cognome
+from ricercatore join progetto_ricerca on ricercatore.progetto=progetto_ricerca.codice_progetto and titolo like 'Genotoxic %';
+
+
+–2. Given the code of research project no. 3, extract the name and surname of the researchers associated with that project;
+
+
+select nome,cognome
+from ricercatore
+where progetto=3;
+
+
+--3. Extract all animal data associated with research project 3;
+
+
+select *
+from animale
+where progetto_ricerca=2;
+
+
+--4. Extract all data of researchers who attended the training course;
+
+
+select *
+from ricercatore 
+where corso_formazione='si';
+
+
+--5.Extract the name and surname of all researchers and the name of the institution they are associated with;
+
+
+select nome, cognome, nome_ente 
+from ricercatore join ente on ricercatore.ente=ente.id_ente;
+
+
+select nome,cognome,nome_ente
+from ricercatore,ente
+where ricercatore.ente=ente.id_ente;
+
+
+--6. Extract reservations on a certain date based on room number 7;
+
+
+select codice_prenotazione, codice_badge 
+from prenota where numero_stanza= 7 and data_prenotazione= '2022-12-26';
+
+
+–7 extract the name and surname of the researchers who booked room n5
+
+
+select nome,cognome
+from ricercatore join prenota on ricercatore.codice_badge=prenota.codice_badge and numero_stanza=5;
+
+
+select nome, cognome 
+from ricercatore, prenota where ricercatore.codice_badge= prenota.codice_badge and numero_stanza= 5;
+
+
+–8 extract the name, surname of the researchers and the booking date of room n6
+
+
+select nome, cognome, data_prenotazione
+from ricercatore join prenota on ricercatore.codice_badge= prenota.codice_badge and numero_stanza = 6;
+
+
+select nome,cognome, data_prenotazione 
+from ricercatore, prenota
+where ricercatore.codice_badge= prenota.codice_badge and numero_stanza= 6;
+
+
+--9.Extract the name and surname of the employees working in room no. 2
+
+
+select nome, cognome
+from dipendente 
+where stanza= 2;
+
+
+--10.Extract the titles of research projects lasting more than 90 days;
+
+
+select titolo from progetto_ricerca 
+where datediff(data_fine, data_approvazione)>90;
+
+
+--11. Extract the number of animals whose species is Rattus rattus and (the number of room for housing);
+
+
+select count(*), stanza
+from animale 
+where specie= 'Rattus rattus'
+group by stanza;
+
+
+--12.Based on the chosen date, extract the name and surname of the researcher and the entry and exit times;
+
+
+select nome, cognome, re.orario_entrata, re.orario_uscita
+from ricercatore r
+join annota_in a on r.codice_badge= a.codice_badge
+join registro re on a.codice_registro= re.codice_registro
+where a.data_entrata= '2022-10-27';
+
+
+select nome,cognome, orario_entrata, orario_uscita
+from ricercatore, annota_in, registro
+where ricercatore.codice_badge=annota_in.codice_badge and annota_in.codice_registro=registro.codice_registro and annota_in.data_entrata='2022-10-27';
+
+
+--13.Given research project no. 2, extract the data relating to the responsible veterinarian.
+
+
+select d.*
+from dipendente d join progetto_ricerca p on d.codice_badge= p.veterinario_responsabile
+where p.codice_progetto=2;
+
+
+select dipendente.*
+from dipendente, progetto_ricerca
+where codice_badge=progetto_ricerca.veterinario_responsabile and progetto_ricerca.codice_progetto=2;
+
+
+--14.Extract data from researchers coming from national institutions;
+
+
+select r.* 
+from ricercatore r, ente as e where r.ente= e.id_ente and e.nazione='Italy';
+
+
+--15.Given the identification code 109 of a researcher, extrapolate the number of entries of the same in the time interval from '2020-05-11' to '2023-10-27'
+
+
+ select count(*)  as numero_entrate  
+from annota_in 
+ where codice_badge="109" and data_entrata between '2020-05-11' and '2023-10-27';
+
+
+--16.Count the animals assigned to research project #1 by species.
+
+
+select count(*), specie
+from animale
+where progetto_ricerca='1'
+group by specie;
+
+
+--17.View researchers working on the research project where Lifton is the owner;
+
+
+select nome, cognome
+from ricercatore
+where progetto=(select codice_progetto from referente join ricercatore on referente.titolare_progetto =ricercatore.codice_badge where cognome='Lifton');
+
+
+select x.nome,x.cognome 
+from ricercatore x, ricercatore y,referente w, referente z
+where y.cognome='Lifton' and x.progetto=w.codice_progetto and w.codice_progetto=z.codice_progetto and z.titolare_progetto=y.codice_badge;
+
+
+--18.Extract project codes, research project titles and reference bodies;
+
+
+select distinct codice_progetto, titolo, e.nome_ente
+from progetto_ricerca p
+join ricercatore r on r.progetto= p.codice_progetto
+join ente e on e.id_ente = r.ente;
+
+
+select distinct codice_progetto, titolo,  nome_ente
+from progetto_ricerca, ricercatore, ente
+where progetto_ricerca.codice_progetto=ricercatore.progetto_ricerca and ente.id_ente=ricercatore.ente;
+
+
+--19.Extract names and surnames of employees who have the same position as Norrington;
+
+
+select nome,cognome, posizione_ricoperta
+from dipendente 
+where posizione_ricoperta=(select posizione_ricoperta from dipendente where cognome='Norrington');
+
+select x.nome, x.cognome,x.posizione_ricoperta
+from dipendente x, dipendente y
+where y.cognome= 'Norrington' and x.posizione_ricoperta=y.posizione_ricoperta;
+
+
+--20. Extract animal ID, species, strain ID of animals present inside the housing room no. 12
+
+
+select id_animale, specie, id_ceppo
+from animale 
+where stanza=12;

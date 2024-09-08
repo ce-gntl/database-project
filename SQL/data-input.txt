@@ -1,0 +1,126 @@
+--all of the data are randomly generated
+
+﻿insert into ente
+values ('766-18-6885', 'Sagent Pharmaceuticals', 'Zwettl', '12 Lawn Alley', 'Austria'),
+('780-05-5271', 'Topco Associates LLC', 'Milano', '5149 Delaware Terrace', 'Italy'),
+('793-77-1555', 'Glenmark Generics Inc.', 'Genova', '7004 Farwell Circle', 'Italy'),
+('862-65-1421', 'Physicians Total Care, Inc.', 'Milano', '0 Roxbury Circle', 'Italy'),
+('191-46-9801', 'Preferred Pharmaceuticals, Inc.', 'Ancona', '10 Paget Court', 'Italy');
+
+
+insert into posizione_ricoperta
+values ('S', 'Tecnico Stabularista'),
+('L', 'Tecnico Laureato'),
+('V', 'Veterinario'),
+('D', 'Direttore'),
+('A', 'Personale Amministrativo'),
+('C', 'Membro Comitato TS');
+
+
+
+
+insert into registro (orario_entrata, orario_uscita) values ('11:10:00','16:00:00');
+insert into registro (orario_entrata, orario_uscita) values ('09:16:00', '18:10:00');
+insert into registro (orario_entrata, orario_uscita) values ('14:00:00', '19:12:00');
+insert into registro (orario_entrata, orario_uscita) values ('10:32:00', '14:55:00');
+insert into registro (orario_entrata, orario_uscita) values ('15:00:00', '19:21:00');
+insert into registro (orario_entrata, orario_uscita) values ('08:56:00', '16:28:00');
+
+
+insert into stanza
+values ('1', 'U1', 'Ufficio Amministrativo'),
+('2', 'U2', 'Ufficio tecnico'),
+('3', 'S2', 'Studio Comitato TS'),
+('4', 'SC1', 'Sala Chirurgica 1'),
+('5', 'SC2', 'Sala Chirurgica 2'),
+('6', 'PC', 'Sala Pre-chirurgica'),
+('7', 'LAB', 'Laboratorio'),
+('8', 'STA1', 'Locale di Stabulazione 1'),
+('9', 'STA2', 'Locale di Stabulazione 2'),
+('10', 'STA3', 'Locale di Stabulazione 3'),
+('11', 'STA4', 'Locale di Stabulazione 4'),
+('12', 'STA5', 'Locale di Stabulazione 5');
+
+
+insert into stanza_stabulazione
+values ('8', '50', 'Rattus Rattus'),
+('9','50', 'Mus Musculus'),
+('10', '50', 'Rattus Rattus'),
+('11', '20', 'Oryctolagus Cuniculus'),
+('12', '15', 'Sus scrofa');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Rita', 'Norrington', 'rplzko52k75p861r', '1974-08-10', 'rnorrington0@hatena.jp', '467 6869050','S','2');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Lilith', 'Doblin', 'tcbeek64r35h807y', '1969-02-11', 'ldoblin1@globo.com', '140 7348931', 'S','2');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Clifford', 'True', 'wlibhe15s48u743u', '1961-05-12', 'ctrue2@gizmodo.com', '303 6845790', 'L','2');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Nial', 'Cianni', 'hpteoc15a19e387z', '1990-03-24', 'ncianni3@ed.gov', '329 3924142', 'A','1');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Rafa', 'Loverock', 'juezdy48v13k564n', '1960-12-03', 'rloverock4@bravesites.com', '265 7806902','V','2');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Tam', 'Simecek', 'jbnwtv54z62c983y', '1972-07-30', 'tsimecek5@patch.com', '596 7200514', 'V','2');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Starlin', 'Deboick', 'xmefvj60l06g023x', '1991-04-02', 'sdeboick6@friendfeed.com', '424 2377588', 'D','1');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Hyacinthia', 'Fortesquieu', 'hlgdij87c56k979f', '1964-08-07', 'hfortesquieu7@qq.com', '485 9998632','A','1');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Taddeusz', 'Attride', 'tgbfsl36r79z468l', '1969-06-07', 'tattride8@ehow.com', '104 4540329','C','3');
+insert into dipendente (nome, cognome, cf, data_nascita, email, telefono, posizione_ricoperta, stanza) values ('Karolina', 'Silwood', 'jqphck38r25s199p', '1959-02-27', 'ksilwood9@google.nl', '576 6409122','C','3');
+
+
+
+
+
+
+insert into progetto_ricerca (titolo,data_approvazione, data_fine, veterinario_responsabile) values ('Increased Drinking following Social Isolation Rearing: Implications for Polydipsia Associated with Schizophrenia','2022-05-29', '2025-05-15', (select codice_badge from dipendente where posizione_ricoperta='v' and cognome='Simecek'));
+insert into progetto_ricerca (titolo,data_approvazione, data_fine, veterinario_responsabile) values ('Chronic prenatal ethanol exposure increases adiposity and disrupts pancreatic morphology in adult guinea pig offspring', '2020-11-22', '2023-08-20',(select codice_badge from dipendente where posizione_ricoperta='v' and cognome='Loverock'));
+insert into progetto_ricerca (titolo,data_approvazione, data_fine, veterinario_responsabile) values ('Epigenetics of the developing and aging brain: Mechanisms that regulate onset and outcomes of brain reorganization', '2019-12-10', '2025-07-14',(select codice_badge from dipendente where posizione_ricoperta='v' and cognome='Simecek'));
+insert into progetto_ricerca (titolo,data_approvazione, data_fine, veterinario_responsabile) values ('Genotoxic Damage During Brain Development Presages Prototypical Neurodegenerative Disease', '2020-01-13', '2025-04-08', (select codice_badge from dipendente where posizione_ricoperta='v' and cognome='Loverock'));
+insert into progetto_ricerca (titolo,data_approvazione, data_fine, veterinario_responsabile) values ('The BBZDR/Wor rat model for investigating the complications of type 2 diabetes mellitus','2021-01-10', '2024-06-27', (select codice_badge from dipendente where posizione_ricoperta='v' and cognome='Loverock'));
+
+
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Herve', 'Brashaw', 'npkhqo17u05r106p', '1968-02-21', 'hbrasha@washington.edu', '794 3577824','si','1','766-18-6885' );
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Theadora', 'Chalker', 'kyhyxo49a69v903h', '1974-11-09', 'tchalker1@qq.com', '931 7436374', 'si','1', '766-18-6885');
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Leandra', 'Loughrey', 'wnipjq96y86q847c', '1963-06-25', 'lloughrey2@quantcast.com', '386 1913143','si','3', '793-77-1555');
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Farand', 'Smellie', 'vhreky90s86f598a', '1993-09-04', 'fsmellie3@blogspot.com', '510 7038293','no','3', '793-77-1555');
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Homerus', 'Queree', 'wezyjy98p90k921z', '1968-05-29', 'hqueree4@biglobe.ne.jp', '193 1863367','si', '3', '793-77-1555');
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Silva', 'Simonnot', 'nqjdis00y27h641h', '1962-07-07', 'ssimonnot5@chicagotribune.com', '398 4567707','no', '2', '862-65-1421');
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Fallon', 'Vigar', 'djuqgg10p90o706d', '1981-01-18', 'fvigar6@hugedomains.com', '950 7429117','si','4','862-65-1421');
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Ryley', 'Lifton', 'xxupdx91j41x592u', '1966-12-05', 'rlifton7@utexas.edu', '533 3786185','no','4','862-65-1421');
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Paxon', 'Minmagh', 'cgvvii37s54a140e', '1993-03-10', 'pminmagh8@qq.com', '398 8953271','si','5','191-46-9801');
+insert into ricercatore (nome, cognome, cf, data_nascita, email, telefono,corso_formazione, progetto, ente) values ('Archambault', 'Twiggs', 'racrnz25g01g529s', '1981-10-20', 'atwiggs9@admin.ch', '465 4179560','no', '5', '191-46-9801');
+
+
+
+
+
+
+
+
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Sus scrofa', 'chf7309024', '2021/12/29', 'Wolfie Bunclark', '12', '1', 'atorvastatin calcium', '2022/08/19', '2023/01/16');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Sus scrofa', 'unq4659279', '2022/07/21', 'Hayden Ellin', '12', '2', 'Polyethylene Glycol 3350', '2022/06/21', '2023/02/03');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Sus scrofa', 'obq2334898', '2021/11/27', 'Viv Bowry', '12', '2', 'Ramipril', '2022/05/31', '2022/12/04');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Sus scrofa', 'oif5866961', '2023/01/15', 'Timmi Hetterich', '12', '3', 'lisdexamfetamine dimesylate', '2022/03/31', '2022/11/15');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Sus scrofa', 'xoc6230827', '2021/08/16', 'Brandie Luchelli', '12', '4', 'DOCUSATE SODIUM', '2022/04/06', '2022/11/27');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Rattus rattus', 'xhp7314326', '2022/06/25', 'Cherye Mohring', '8', '4', 'Aspergillus niger', '2022/07/28', '2023/02/07');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Oryctolagus cuniculus', 'mvo9659957', '2022/10/30', 'Moishe Morville', '11', '4', 'Famotidine', '2022/02/22', '2022/12/18');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Rattus rattus', 'mbd9985292', '2020/11/21', 'Cece Wallas', '8', '5', 'ETHYL ALCOHOL', '2022/05/26', '2022/12/13');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Sus scrofa', 'cke6306987', '2021/07/13', 'Jose Hurn', '12', '5', 'ropinirole', '2022/07/18', '2022/12/24');
+insert into animale (specie, id_ceppo, data_arrivo, nome_venditore, stanza, progetto_ricerca, trattamento, data_assegnazione, data_fine) values ('Mus musculus', 'kfb6137024', '2021/01/26', 'Pryce Shilling', '9', '1', 'emtricitabine', '2022/04/06', '2022/11/12');
+
+
+
+
+insert into referente values ((select codice_badge from ricercatore where progetto= 1 and cognome= 'Brashaw' ),1);
+insert into referente values ((select codice_badge from ricercatore where progetto= 2 and cognome= 'Simonnot' ),2);
+insert into referente values ((select codice_badge from ricercatore where progetto= 3 and cognome= 'Smellie' ),3);
+insert into referente values ((select codice_badge from ricercatore where progetto= 4 and cognome= 'Lifton'),4);
+insert into referente values ((select codice_badge from ricercatore where progetto= 5 and cognome= 'Twiggs' ), 5);
+
+
+
+
+insert into annota_in values (1,101,'2020-06-12'),
+(2, 109, '2022-10-22'),
+(3,105,'2023-01-15'),
+(4, 109, '2022-12-31'),
+(5,103, '2022-10-27'),
+(6, 104, '2023-01-13');
+
+
+insert into prenota ( codice_badge, numero_stanza, data_prenotazione) values(102,7,'2022-12-26');
+insert into prenota (codice_badge, numero_stanza, data_prenotazione) values(109,6,'2022-06-26');
+insert into prenota (codice_badge, numero_stanza, data_prenotazione) values(103,5,'2023-01-26');
+insert into prenota (codice_badge, numero_stanza, data_prenotazione) values(102,4,'2023-03-26');
